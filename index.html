@@ -63,7 +63,7 @@
           transform="rotate(-90 110 110)"/>
       </svg>
       <div class="ring-center">
-        <img class="cat-gif" id="catimg" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3ZhcXFidmxxb3g1Y3A1M3R5N3dwbnU1bXg5YWRhNml4Mmptb3pkeCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/8g75nUdA6wNf79H6K4/giphy.gif" alt="cozy cat">
+        <img class="cat-gif" id="catimg" src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3ZhcXFidmxxb3g1Y3A1M3R5N3dwbnU1bXg5YWRhNml4Mmptb3pkeCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/8g75nUdA6wNf79H6K4/giphy.gif" alt="cozy cat">
         <span class="time-txt" id="disp">25:00</span>
       </div>
       <div class="toast" id="toast"></div>
@@ -84,10 +84,11 @@
 
   <script>
     const CIRC = 603.2;
+    // Fixed asset CDN links here
     const CATS = {
-      focus: 'https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3ZhcXFidmxxb3g1Y3A1M3R5N3dwbnU1bXg5YWRhNml4Mmptb3pkeCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/8g75nUdA6wNf79H6K4/giphy.gif',
-      short: 'https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif',
-      long:  'https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif',
+      focus: 'https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3ZhcXFidmxxb3g1Y3A1M3R5N3dwbnU1bXg5YWRhNml4Mmptb3pkeCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/8g75nUdA6wNf79H6K4/giphy.gif',
+      short: 'https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3ZhcXFidmxxb3g1Y3A1M3R5N3dwbnU1bXg5YWRhNml4Mmptb3pkeCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/MDJ9IbxxvDUQM/giphy.gif',
+      long:  'https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3ZhcXFidmxxb3g1Y3A1M3R5N3dwbnU1bXg5YWRhNml4Mmptb3pkeCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/MDJ9IbxxvDUQM/giphy.gif',
     };
     let total = 25*60, remaining = 25*60, running = false, interval = null, sessions = 0, modeKey = 'focus', tasks = [];
     const disp = document.getElementById('disp');
