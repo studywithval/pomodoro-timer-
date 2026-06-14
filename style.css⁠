@@ -1,0 +1,50 @@
+body {
+    background-color: #FFF0F5; /* Soft lavender/pink blush background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: 'Fredoka One', cursive;
+}
+
+.timer-container {
+    background-color: #FFFFFF;
+    padding: 30px;
+    border-radius: 24px;
+    box-shadow: 0px 8px 24px rgba(255, 182, 193, 0.4); /* Pastel pink shadow */
+    text-align: center;
+    border: 4px solid #FFB7B2; /* Pastel coral border */
+    width: 300px;
+}
+
+.anime-gif {
+    width: 100px;
+    height: auto;
+    margin-bottom: 15px;
+}
+
+#timer-display {
+    font-size: 4rem;
+    color: #FF9AA2; /* Soft pastel red/pink */
+    margin: 10px 0;
+    text-shadow: 2px 2px #FFDAC1; /* Soft peach text shadow */
+}
+
+.button-group button {
+    background-color: #E2F0CB; /* Pastel mint green */
+    border: 2px solid #B5EAD7;
+    color: #6C5B7B;
+    padding: 10px 18px;
+    font-size: 1rem;
+    font-family: 'Fredoka One', cursive;
+    border-radius: 12px;
+    cursor: pointer;
+    margin: 5px;
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+.button-group button:hover {
+    transform: scale(1.05);
+    background-color: #B5EAD7; /* Darker pastel mint on hover */
+}
