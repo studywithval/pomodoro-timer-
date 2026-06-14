@@ -145,31 +145,34 @@ function renderTasks() {
   tasks.forEach((t, i) => {
     const item = document.createElement('div');
     item.className = 'task-item' + (t.done ? ' done-task' : '');
-    item.onclick = () => toggleTask(i);
+    
+    // Toggle done status only when clicking the task content area
+    item.onclick = (e) => {
+      if (e.target.classList.contains('del-btn')) return;
+      toggleTask(i);
+    };
 
     const check = document.createElement('div');
     check.className = 'check';
-    if (t.done) {
-      check.innerHTML = `
-        <svg width="11" height="11" viewBox="0 0 11 11">
-          <polyline points="1.5,5.5 4.5,8.5 9.5,2.5"
-            stroke="white" stroke-width="2" fill="none"
-            stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>`;
-    }
-
+    if (t.done) check.innerHTML = `<svg width="11" height="11" viewBox="0 0 11 11"><polyline points="1.5,5.5 4.5,8.5 9.5,2.5" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+    
     const label = document.createElement('span');
     label.textContent = t.text;
+    label.style.flex = "1"; // Pushes delete button to the right
 
-    item.appendChild(check);
-    item.appendChild(label);
+    const delBtn = document.createElement('button');
+    delBtn.className = 'del-btn';
+    delBtn.textContent = '×';
+    delBtn.style.cssText = "background:none; border:none; color:#c8aab7; font-size:18px; cursor:pointer; padding:0 4px;";
+    delBtn.onclick = (e) => {
+      e.stopPropagation(); // Prevent triggering toggleTask
+      tasks.splice(i, 1);
+      renderTasks();
+    };
+
+    item.appendChild(check); 
+    item.appendChild(label); 
+    item.appendChild(delBtn);
     taskList.appendChild(item);
   });
 }
-
-// ── Event listeners ──
-addBtn.addEventListener('click', addTask);
-taskIn.addEventListener('keydown', e => { if (e.key === 'Enter') addTask(); });
-
-// ── Init ──
-renderDots();
