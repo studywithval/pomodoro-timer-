@@ -22,55 +22,115 @@
 
     <div class="length-row" id="length-row"></div>
 
-    <div class="scene">
-      <div class="ring-area">
-        <svg width="220" height="220" aria-hidden="true">
-          <circle cx="110" cy="110" r="96" fill="none" stroke="#F4C0D1" stroke-width="10"/>
-          <circle id="arc" cx="110" cy="110" r="96" fill="none" stroke="#D4537E" stroke-width="10"
-            stroke-linecap="round" stroke-dasharray="603.2" stroke-dashoffset="0"
-            transform="rotate(-90 110 110)"/>
-        </svg>
-        <div class="ring-center">
-          <span class="time-txt" id="disp">25:00</span>
-          <div class="nudge-row">
-            <button class="nudge-btn" id="minus-btn" title="1 minute less">−1m</button>
-            <button class="nudge-btn" id="plus-btn" title="1 minute more">+1m</button>
-          </div>
+    <div class="ring-area">
+      <svg width="220" height="220" aria-hidden="true">
+        <circle cx="110" cy="110" r="96" fill="none" stroke="#00000022" stroke-width="10"/>
+        <circle id="arc" cx="110" cy="110" r="96" fill="none" stroke="#5b3a29" stroke-width="10"
+          stroke-linecap="round" stroke-dasharray="603.2" stroke-dashoffset="0"
+          transform="rotate(-90 110 110)"/>
+      </svg>
+      <div class="ring-center">
+        <span class="time-txt" id="disp">25:00</span>
+        <div class="nudge-row">
+          <button class="nudge-btn" id="minus-btn" title="1 minute less">−1m</button>
+          <button class="nudge-btn" id="plus-btn" title="1 minute more">+1m</button>
         </div>
-      </div>
-
-      <div class="cat-scene" id="cat-scene">
-        <svg viewBox="0 0 200 170" width="200" height="150" aria-hidden="true" id="cat-svg" class="state-focus">
-          <rect x="60" y="60" width="10" height="64" rx="5" fill="#c99a75"/>
-          <rect x="55" y="120" width="90" height="14" rx="7" fill="#c99a75"/>
-          <rect x="62" y="134" width="10" height="26" rx="4" fill="#b6835c"/>
-          <rect x="128" y="134" width="10" height="26" rx="4" fill="#b6835c"/>
-          <path id="tail" d="M138 118 Q168 110 160 84" stroke="#3a3a3a" stroke-width="10" fill="none" stroke-linecap="round"/>
-          <ellipse cx="100" cy="104" rx="42" ry="30" fill="#3a3a3a"/>
-          <rect class="blanket" x="58" y="104" width="84" height="20" rx="10" fill="#AFA9EC"/>
-          <circle cx="100" cy="66" r="30" fill="#3a3a3a"/>
-          <path d="M76 46 L70 20 L94 40 Z" fill="#3a3a3a"/>
-          <path d="M124 46 L130 20 L106 40 Z" fill="#3a3a3a"/>
-          <path d="M80 40 L76 28 L90 38 Z" fill="#f2b6c8"/>
-          <path d="M120 40 L124 28 L110 38 Z" fill="#f2b6c8"/>
-          <g id="eyes-open">
-            <ellipse cx="88" cy="66" rx="4" ry="6" fill="#fff9fb"/>
-            <ellipse cx="112" cy="66" rx="4" ry="6" fill="#fff9fb"/>
-          </g>
-          <g id="eyes-closed">
-            <path d="M82 66 Q88 72 94 66" stroke="#fff9fb" stroke-width="3" fill="none" stroke-linecap="round"/>
-            <path d="M106 66 Q112 72 118 66" stroke="#fff9fb" stroke-width="3" fill="none" stroke-linecap="round"/>
-          </g>
-          <path d="M96 76 L104 76 L100 82 Z" fill="#f2b6c8"/>
-          <path d="M100 82 Q94 88 86 84" stroke="#fff9fb" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-          <path d="M100 82 Q106 88 114 84" stroke="#fff9fb" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-          <text id="zzz" x="130" y="42" font-size="16" fill="#AFA9EC">z z z</text>
-        </svg>
-        <div class="sparkle-layer" id="sparkle-layer"></div>
       </div>
     </div>
 
     <div class="phase-badge" id="phase-lbl">focus time</div>
+
+    <div class="cat-scene" id="cat-scene">
+      <svg viewBox="0 0 300 320" aria-hidden="true" id="room-svg" preserveAspectRatio="xMidYMax slice">
+        <rect x="0" y="0" width="300" height="220" fill="var(--wall)"/>
+        <rect x="0" y="220" width="300" height="100" fill="var(--floor)"/>
+        <rect x="0" y="218" width="300" height="4" fill="var(--floor-trim)"/>
+
+        <!-- wall art: paw print frame -->
+        <rect x="18" y="22" width="52" height="64" rx="4" fill="var(--accent-red)"/>
+        <rect x="24" y="28" width="40" height="52" rx="2" fill="var(--cream)"/>
+        <ellipse cx="44" cy="61" rx="8" ry="6" fill="var(--rose)"/>
+        <circle cx="34" cy="47" r="4" fill="var(--rose)"/>
+        <circle cx="44" cy="43" r="4.5" fill="var(--rose)"/>
+        <circle cx="54" cy="47" r="4" fill="var(--rose)"/>
+
+        <!-- book stack -->
+        <g>
+          <rect x="8" y="296" width="60" height="13" rx="2" fill="#7d3838" transform="rotate(-2 38 302)"/>
+          <rect x="10" y="283" width="55" height="13" rx="2" fill="#c98f2e" transform="rotate(1.5 38 289)"/>
+          <rect x="8" y="270" width="58" height="13" rx="2" fill="#345f45" transform="rotate(-1.5 38 276)"/>
+          <rect x="12" y="257" width="48" height="13" rx="2" fill="#2b4a72" transform="rotate(2 36 263)"/>
+          <rect x="14" y="245" width="40" height="12" rx="2" fill="var(--cream)" stroke="var(--accent-red)" stroke-width="2" transform="rotate(-1 34 251)"/>
+        </g>
+
+        <!-- cat tree with second cat -->
+        <g>
+          <rect x="248" y="110" width="10" height="190" rx="3" fill="var(--leather-dark)"/>
+          <rect x="210" y="245" width="88" height="12" rx="5" fill="var(--leather-dark)"/>
+          <rect x="222" y="170" width="64" height="12" rx="5" fill="var(--leather-dark)"/>
+          <circle cx="230" cy="224" r="14" fill="#ffe9a8" opacity="0.35"/>
+          <rect x="225" y="233" width="6" height="12" fill="var(--leather-darker)"/>
+          <path d="M222 233 L238 233 L232 214 Z" fill="var(--cream)"/>
+          <ellipse cx="278" cy="240" rx="8" ry="6" fill="var(--rug-blue)"/>
+          <ellipse cx="253" cy="157" rx="15" ry="12" fill="var(--cat-black)"/>
+          <circle cx="253" cy="140" r="10" fill="var(--cat-black)"/>
+          <path d="M243 132 L239 120 L250 130 Z" fill="var(--cat-black)"/>
+          <path d="M263 132 L267 120 L256 130 Z" fill="var(--cat-black)"/>
+          <path d="M266 160 Q278 155 274 142" stroke="var(--cat-black)" stroke-width="5" fill="none" stroke-linecap="round"/>
+          <rect x="243" y="146" width="20" height="7" rx="3" fill="var(--accent-red)"/>
+        </g>
+
+        <!-- gingham rug -->
+        <defs>
+          <pattern id="gingham" width="20" height="20" patternUnits="userSpaceOnUse">
+            <rect width="20" height="20" fill="var(--rug-cream)"/>
+            <rect width="10" height="10" fill="var(--rug-blue)"/>
+            <rect x="10" y="10" width="10" height="10" fill="var(--rug-blue)"/>
+          </pattern>
+        </defs>
+        <rect x="50" y="262" width="220" height="55" rx="10" fill="url(#gingham)" transform="rotate(-1.5 160 290)"/>
+
+        <!-- recliner chair -->
+        <g>
+          <rect x="95" y="255" width="140" height="20" rx="9" fill="var(--leather-dark)"/>
+          <rect x="115" y="273" width="12" height="34" rx="5" fill="var(--leather-darker)"/>
+          <rect x="195" y="273" width="12" height="34" rx="5" fill="var(--leather-darker)"/>
+          <rect x="70" y="185" width="25" height="80" rx="12" fill="var(--leather-dark)"/>
+          <rect x="205" y="185" width="25" height="80" rx="12" fill="var(--leather-dark)"/>
+          <rect x="95" y="150" width="140" height="110" rx="22" fill="var(--leather)"/>
+          <ellipse cx="165" cy="146" rx="75" ry="18" fill="var(--leather)"/>
+          <line x1="130" y1="168" x2="130" y2="232" stroke="var(--leather-darker)" stroke-width="3" opacity="0.45"/>
+          <line x1="165" y1="163" x2="165" y2="238" stroke="var(--leather-darker)" stroke-width="3" opacity="0.45"/>
+          <line x1="200" y1="168" x2="200" y2="232" stroke="var(--leather-darker)" stroke-width="3" opacity="0.45"/>
+        </g>
+
+        <!-- cat on chair (interactive) -->
+        <g id="cat-svg" class="state-focus">
+          <path id="tail" d="M205 233 Q246 213 233 164" stroke="var(--cat-black)" stroke-width="11" fill="none" stroke-linecap="round"/>
+          <ellipse cx="165" cy="230" rx="48" ry="34" fill="var(--cat-black)"/>
+          <ellipse cx="165" cy="247" rx="22" ry="15" fill="var(--cat-belly)"/>
+          <rect class="blanket" x="108" y="230" width="114" height="27" rx="13" fill="var(--blanket)"/>
+          <circle cx="165" cy="186" r="34" fill="var(--cat-black)"/>
+          <path d="M138 166 L130 133 L158 161 Z" fill="var(--cat-black)"/>
+          <path d="M192 166 L200 133 L172 161 Z" fill="var(--cat-black)"/>
+          <path d="M142 158 L137 140 L152 156 Z" fill="var(--rose)"/>
+          <path d="M188 158 L193 140 L178 156 Z" fill="var(--rose)"/>
+          <g id="eyes-open">
+            <ellipse cx="152" cy="186" rx="4" ry="6" fill="var(--cream)"/>
+            <ellipse cx="178" cy="186" rx="4" ry="6" fill="var(--cream)"/>
+          </g>
+          <g id="eyes-closed">
+            <path d="M146 186 Q152 193 158 186" stroke="var(--cream)" stroke-width="3" fill="none" stroke-linecap="round"/>
+            <path d="M172 186 Q178 193 184 186" stroke="var(--cream)" stroke-width="3" fill="none" stroke-linecap="round"/>
+          </g>
+          <path d="M160 198 L170 198 L165 204 Z" fill="var(--rose)"/>
+          <path d="M165 204 Q158 210 149 206" stroke="var(--cream)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <path d="M165 204 Q172 210 181 206" stroke="var(--cream)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <text id="zzz" x="222" y="140" font-size="18" fill="var(--zzz)">z z z</text>
+        </g>
+      </svg>
+      <div class="sparkle-layer" id="sparkle-layer"></div>
+    </div>
 
     <div class="btn-row">
       <button class="bigbtn start-btn" id="startbtn">start</button>

@@ -61,7 +61,7 @@ const todayLbl = document.getElementById('today-lbl');
 
 function fmt(s) { return `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`; }
 function updateArc() { arc.style.strokeDashoffset = CIRC * (1 - remaining / total); }
-function showToast(msg, color = '#D4537E') {
+function showToast(msg, color = '#b8392f') {
   toastEl.textContent = msg; toastEl.style.background = color;
   toastEl.classList.add('show'); setTimeout(() => toastEl.classList.remove('show'), 1800);
 }
@@ -149,7 +149,7 @@ function renderLengthChips() {
     chip.className = 'len-chip' + (mins === lengths[modeKey] ? ' active' : '') + (running ? ' disabled' : '');
     chip.textContent = `${mins}m`;
     chip.onclick = () => {
-      if (running) { showToast('pause first to change length', '#534AB7'); return; }
+      if (running) { showToast('pause first to change length', '#5a6b45'); return; }
       lengths[modeKey] = mins;
       saveState();
       setMode(modeKey);
@@ -186,7 +186,7 @@ function toggle() {
           showToast(sessions === 4 ? '4 done! time for a long break' : 'session done! great work');
           if (sessions === 4) sessions = 0;
         } else {
-          showToast('break over! back to it', '#534AB7');
+          showToast('break over! back to it', '#5a6b45');
         }
       }
     }, 1000);
@@ -203,7 +203,7 @@ function reset() {
 
 function skip() {
   if (modeKey === 'focus') { sessions = Math.min(4, sessions + 1); renderDots(); }
-  reset(); showToast('skipped!', '#1D9E75');
+  reset(); showToast('skipped!', '#3d5230');
 }
 
 function nudge(deltaMin) {
@@ -233,7 +233,7 @@ function nextStep() {
   tasks[currentIndex].done = true;
   currentIndex = findNextIncomplete(currentIndex);
   saveState(); renderTasks(); renderCurrentStep();
-  showToast('step done! nice work', '#1D9E75');
+  showToast('step done! nice work', '#3d5230');
 }
 
 function renderCurrentStep() {
