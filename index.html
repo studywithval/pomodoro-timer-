@@ -1,169 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cozy Cat Timer</title>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: #fff9fb; font-family: 'Fredoka One', cursive; }
-    .wrap { display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 2rem 1.5rem 2.5rem; width: 100%; max-width: 400px; }
-    .mode-row { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
-    .mtab { font-family: 'Fredoka One', cursive; font-size: 14px; padding: 6px 16px; border-radius: 20px; border: 2px solid transparent; cursor: pointer; transition: all 0.15s; background: #f5f0f3; color: #888; }
-    .mtab:hover { background: #FBEAF0; color: #993556; }
-    .mtab.active { color: #993556; background: #FBEAF0; border-color: #ED93B1; }
-    .ring-area { position: relative; width: 220px; height: 220px; }
-    .ring-area svg { position: absolute; top: 0; left: 0; }
-    #arc { transition: stroke-dashoffset 0.95s linear; }
-    .ring-center { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; }
-    .cat-gif { width: 80px; height: 80px; border-radius: 50%; border: 3px solid #ED93B1; object-fit: cover; }
-    .time-txt { font-family: 'Fredoka One', cursive; font-size: 52px; line-height: 1; color: #2c2c2a; letter-spacing: 1px; }
-    .toast { position: absolute; top: -44px; left: 50%; transform: translateX(-50%); font-family: 'Fredoka One', cursive; font-size: 14px; padding: 6px 18px; border-radius: 20px; white-space: nowrap; pointer-events: none; opacity: 0; transition: opacity 0.3s; color: #fff; }
-    .toast.show { opacity: 1; }
-    .phase-badge { font-family: 'Fredoka One', cursive; font-size: 14px; padding: 4px 14px; border-radius: 20px; background: #EEEDFE; color: #534AB7; border: 1.5px solid #AFA9EC; }
-    .btn-row { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
-    .bigbtn { font-family: 'Fredoka One', cursive; font-size: 18px; padding: 12px 28px; border-radius: 24px; border: 2px solid; cursor: pointer; transition: all 0.12s; }
-    .bigbtn:active { transform: scale(0.96); }
-    .start-btn { background: #D4537E; border-color: #993556; color: #fff; }
-    .start-btn:hover { background: #993556; }
-    .reset-btn { background: #EEEDFE; border-color: #AFA9EC; color: #3C3489; }
-    .reset-btn:hover { background: #CECBF6; }
-    .skip-btn { background: #E1F5EE; border-color: #5DCAA5; color: #085041; }
-    .skip-btn:hover { background: #9FE1CB; }
-    .dots-row { display: flex; gap: 10px; align-items: center; }
-    .dot { width: 16px; height: 16px; border-radius: 50%; background: #f5f0f3; border: 2px solid #ED93B1; transition: all 0.3s; }
-    .dot.done { background: #D4537E; border-color: #993556; }
-    .task-row { display: flex; gap: 8px; width: 100%; }
-    .task-row input { flex: 1; font-family: 'Fredoka One', cursive; font-size: 14px; padding: 9px 14px; border-radius: 16px; border: 2px solid #ED93B1; background: #fff; color: #2c2c2a; outline: none; }
-    .task-row input:focus { border-color: #D4537E; }
-    .task-row input::placeholder { color: #c8aab7; }
-    .task-row button { font-family: 'Fredoka One', cursive; font-size: 14px; padding: 9px 16px; border-radius: 16px; border: 2px solid #5DCAA5; background: #E1F5EE; color: #085041; cursor: pointer; }
-    .task-row button:hover { background: #9FE1CB; }
-    .task-list { width: 100%; display: flex; flex-direction: column; gap: 6px; }
-    .task-item { display: flex; align-items: center; gap: 10px; padding: 9px 14px; border-radius: 14px; border: 1.5px solid #ede0e8; background: #fff; font-size: 14px; cursor: pointer; color: #2c2c2a; }
-    .task-item:hover { border-color: #ED93B1; background: #fff9fb; }
-    .task-item.done-task { opacity: 0.45; text-decoration: line-through; }
-    .check { width: 20px; height: 20px; border-radius: 50%; border: 2px solid #ED93B1; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .task-item.done-task .check { background: #D4537E; border-color: #993556; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cozy Cat Focus — ADHD-friendly Pomodoro</title>
+<meta name="description" content="A gentle, cat-themed Pomodoro timer built for ADHD brains: one step at a time, flexible timers, and dopamine-friendly rewards.">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="wrap" id="app">
-    <div class="mode-row">
-      <button class="mtab active" id="tab-focus" onclick="setMode('focus',25,'focus time')">focus (25m)</button>
-      <button class="mtab" id="tab-short" onclick="setMode('short',5,'short break')">short break (5m)</button>
-      <button class="mtab" id="tab-long" onclick="setMode('long',15,'long break')">long break (15m)</button>
+  <main class="wrap">
+    <header class="top-row">
+      <h1 class="app-title">Cozy Cat Focus</h1>
+      <button class="icon-btn" id="sound-btn" title="Toggle sound" aria-label="Toggle sound">🔔</button>
+    </header>
+
+    <div class="mode-row" role="tablist" aria-label="Timer mode">
+      <button class="mtab active" data-mode="focus" id="tab-focus" role="tab" aria-selected="true">focus</button>
+      <button class="mtab" data-mode="short" id="tab-short" role="tab" aria-selected="false">short break</button>
+      <button class="mtab" data-mode="long" id="tab-long" role="tab" aria-selected="false">long break</button>
     </div>
-    <div class="ring-area">
-      <svg width="220" height="220" aria-hidden="true">
-        <circle cx="110" cy="110" r="96" fill="none" stroke="#F4C0D1" stroke-width="10"/>
-        <circle id="arc" cx="110" cy="110" r="96" fill="none" stroke="#D4537E" stroke-width="10"
-          stroke-linecap="round" stroke-dasharray="603.2" stroke-dashoffset="0"
-          transform="rotate(-90 110 110)"/>
-      </svg>
-      <div class="ring-center">
-        <img class="cat-gif" id="catimg" src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExa2diMnkzeG1jdmZsNWd6cWgweHRpd3hqeWFmdm9ibDlmNHk4b2N0cCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/PeOnYlW8AmjcQEc2bZ/giphy.gif" alt="cozy cat">
-        <span class="time-txt" id="disp">25:00</span>
+
+    <div class="length-row" id="length-row"></div>
+
+    <div class="scene">
+      <div class="ring-area">
+        <svg width="220" height="220" aria-hidden="true">
+          <circle cx="110" cy="110" r="96" fill="none" stroke="#F4C0D1" stroke-width="10"/>
+          <circle id="arc" cx="110" cy="110" r="96" fill="none" stroke="#D4537E" stroke-width="10"
+            stroke-linecap="round" stroke-dasharray="603.2" stroke-dashoffset="0"
+            transform="rotate(-90 110 110)"/>
+        </svg>
+        <div class="ring-center">
+          <span class="time-txt" id="disp">25:00</span>
+          <div class="nudge-row">
+            <button class="nudge-btn" id="minus-btn" title="1 minute less">−1m</button>
+            <button class="nudge-btn" id="plus-btn" title="1 minute more">+1m</button>
+          </div>
+        </div>
       </div>
-      <div class="toast" id="toast"></div>
+
+      <div class="cat-scene" id="cat-scene">
+        <svg viewBox="0 0 200 170" width="200" height="150" aria-hidden="true" id="cat-svg" class="state-focus">
+          <rect x="60" y="60" width="10" height="64" rx="5" fill="#c99a75"/>
+          <rect x="55" y="120" width="90" height="14" rx="7" fill="#c99a75"/>
+          <rect x="62" y="134" width="10" height="26" rx="4" fill="#b6835c"/>
+          <rect x="128" y="134" width="10" height="26" rx="4" fill="#b6835c"/>
+          <path id="tail" d="M138 118 Q168 110 160 84" stroke="#3a3a3a" stroke-width="10" fill="none" stroke-linecap="round"/>
+          <ellipse cx="100" cy="104" rx="42" ry="30" fill="#3a3a3a"/>
+          <rect class="blanket" x="58" y="104" width="84" height="20" rx="10" fill="#AFA9EC"/>
+          <circle cx="100" cy="66" r="30" fill="#3a3a3a"/>
+          <path d="M76 46 L70 20 L94 40 Z" fill="#3a3a3a"/>
+          <path d="M124 46 L130 20 L106 40 Z" fill="#3a3a3a"/>
+          <path d="M80 40 L76 28 L90 38 Z" fill="#f2b6c8"/>
+          <path d="M120 40 L124 28 L110 38 Z" fill="#f2b6c8"/>
+          <g id="eyes-open">
+            <ellipse cx="88" cy="66" rx="4" ry="6" fill="#fff9fb"/>
+            <ellipse cx="112" cy="66" rx="4" ry="6" fill="#fff9fb"/>
+          </g>
+          <g id="eyes-closed">
+            <path d="M82 66 Q88 72 94 66" stroke="#fff9fb" stroke-width="3" fill="none" stroke-linecap="round"/>
+            <path d="M106 66 Q112 72 118 66" stroke="#fff9fb" stroke-width="3" fill="none" stroke-linecap="round"/>
+          </g>
+          <path d="M96 76 L104 76 L100 82 Z" fill="#f2b6c8"/>
+          <path d="M100 82 Q94 88 86 84" stroke="#fff9fb" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <path d="M100 82 Q106 88 114 84" stroke="#fff9fb" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <text id="zzz" x="130" y="42" font-size="16" fill="#AFA9EC">z z z</text>
+        </svg>
+        <div class="sparkle-layer" id="sparkle-layer"></div>
+      </div>
     </div>
+
     <div class="phase-badge" id="phase-lbl">focus time</div>
+
     <div class="btn-row">
-      <button class="bigbtn start-btn" id="startbtn" onclick="toggle()">start</button>
-      <button class="bigbtn reset-btn" onclick="reset()">reset</button>
-      <button class="bigbtn skip-btn" onclick="skip()">skip</button>
+      <button class="bigbtn start-btn" id="startbtn">start</button>
+      <button class="bigbtn reset-btn" id="resetbtn">reset</button>
+      <button class="bigbtn skip-btn" id="skipbtn">skip</button>
     </div>
+
     <div class="dots-row" id="dots"></div>
-    <div class="task-row">
-      <input type="text" id="task-in" placeholder="what are we focusing on?" maxlength="40">
-      <button id="add-btn">add</button>
+
+    <div class="stats-row">
+      <span id="streak-lbl">🔥 0 day streak</span>
+      <span id="today-lbl">0 sessions today</span>
     </div>
-    <div class="task-list" id="task-list"></div>
-  </div>
 
-  <script>
-    const CIRC = 603.2;
-    // Fixed asset CDN links here
-    const CATS = {
-      focus: "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExa2diMnkzeG1jdmZsNWd6cWgweHRpd3hqeWFmdm9ibDlmNHk4b2N0cCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/PeOnYlW8AmjcQEc2bZ/giphy.gif" ,
-      short: "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExdm5hOXVyZmJudDR0b252NGRuczAzamVxZTdwaGc0cHltZjV5ZXR1MiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/KHQnucWq6EK6uniASZ/giphy.gif" ,
-      long:  "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExMzRiZGpqbHlvN3FxaWhzY3dqMjJwOGZyNjloZmZjZjQ4dWc3eXRzZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/eH3yTE7OfOnDCnpfr5/giphy.gif" ,
-    };
-    let total = 25*60, remaining = 25*60, running = false, interval = null, sessions = 0, modeKey = 'focus', tasks = [];
-    const disp = document.getElementById('disp');
-    const arc = document.getElementById('arc');
-    const startBtn = document.getElementById('startbtn');
-    const toastEl = document.getElementById('toast');
-    const dotsEl = document.getElementById('dots');
-    const taskIn = document.getElementById('task-in');
-    const taskList = document.getElementById('task-list');
+    <div class="break-card" id="break-card" hidden>
+      <p class="break-title">break idea</p>
+      <p class="break-idea" id="break-idea">stretch like a cat</p>
+      <button class="shuffle-btn" id="shuffle-btn">🔀 new idea</button>
+    </div>
 
-    function fmt(s) { return `${String(Math.floor(s/60)).padStart(2,'0')}:${String(s%60).padStart(2,'0')}`; }
-    function updateArc() { arc.style.strokeDashoffset = CIRC * (1 - remaining / total); }
-    function showToast(msg, color='#D4537E') {
-      toastEl.textContent = msg; toastEl.style.background = color;
-      toastEl.classList.add('show'); setTimeout(() => toastEl.classList.remove('show'), 1800);
-    }
-    function renderDots() {
-      dotsEl.innerHTML = '';
-      for (let i = 0; i < 4; i++) { const d = document.createElement('div'); d.className = 'dot' + (i < sessions ? ' done' : ''); dotsEl.appendChild(d); }
-    }
-    function setMode(key, mins, label) {
-      clearInterval(interval); running = false; startBtn.textContent = 'start';
-      modeKey = key; total = mins*60; remaining = total;
-      disp.textContent = fmt(remaining); arc.style.strokeDashoffset = 0;
-      document.getElementById('phase-lbl').textContent = label;
-      document.getElementById('catimg').src = CATS[key];
-      document.querySelectorAll('.mtab').forEach(t => t.classList.remove('active'));
-      document.getElementById('tab-' + key).classList.add('active');
-    }
-    function toggle() {
-      if (!running) {
-        running = true; startBtn.textContent = 'pause';
-        interval = setInterval(() => {
-          remaining--; disp.textContent = fmt(remaining); updateArc();
-          if (remaining <= 0) {
-            clearInterval(interval); running = false; startBtn.textContent = 'start';
-            if (modeKey === 'focus') {
-              sessions = Math.min(4, sessions + 1); renderDots();
-              showToast(sessions === 4 ? '4 done! take a long break!' : 'session done! great work');
-              if (sessions === 4) sessions = 0;
-            } else { showToast('break over! back to it', '#534AB7'); }
-          }
-        }, 1000);
-      } else { running = false; startBtn.textContent = 'resume'; clearInterval(interval); }
-    }
-    function reset() {
-      clearInterval(interval); running = false; startBtn.textContent = 'start';
-      remaining = total; disp.textContent = fmt(remaining); arc.style.strokeDashoffset = 0;
-    }
-    function skip() {
-      if (modeKey === 'focus') { sessions = Math.min(4, sessions + 1); renderDots(); }
-      reset(); showToast('skipped!', '#1D9E75');
-    }
-    function addTask() {
-      const val = taskIn.value.trim(); if (!val) return;
-      tasks.push({ text: val, done: false }); taskIn.value = ''; renderTasks();
-    }
-    function toggleTask(i) { tasks[i].done = !tasks[i].done; renderTasks(); }
-    function renderTasks() {
-      taskList.innerHTML = '';
-      tasks.forEach((t, i) => {
-        const item = document.createElement('div');
-        item.className = 'task-item' + (t.done ? ' done-task' : '');
-        item.onclick = () => toggleTask(i);
-        const check = document.createElement('div');
-        check.className = 'check';
-        if (t.done) check.innerHTML = `<svg width="11" height="11" viewBox="0 0 11 11"><polyline points="1.5,5.5 4.5,8.5 9.5,2.5" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
-        const label = document.createElement('span');
-        label.textContent = t.text;
-        item.appendChild(check); item.appendChild(label); taskList.appendChild(item);
-      });
-    }
-    document.getElementById('add-btn').addEventListener('click', addTask);
-    taskIn.addEventListener('keydown', e => { if (e.key === 'Enter') addTask(); });
-    renderDots();
-  </script>
+    <section class="focus-card">
+      <p class="focus-label">right now, focus on:</p>
+      <p class="current-step" id="current-step">nothing set yet — add a step below</p>
+      <div class="task-row">
+        <input type="text" id="task-in" placeholder="break your task into a tiny step" maxlength="60">
+        <button id="add-btn">add</button>
+      </div>
+      <button class="next-step-btn" id="next-step-btn" hidden>done with this step → next</button>
+      <details class="steps-details">
+        <summary>all steps (<span id="step-count">0</span>)</summary>
+        <div class="task-list" id="task-list"></div>
+      </details>
+    </section>
+
+    <div class="toast" id="toast"></div>
+  </main>
+
+  <script src="script.js"></script>
 </body>
 </html>
