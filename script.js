@@ -25,12 +25,12 @@ const DOG_SVG = `
   <ellipse cx="155" cy="238" rx="68" ry="20" fill="url(#gradDog)"></ellipse>
   <ellipse cx="155" cy="228" rx="58" ry="8" fill="var(--wood-darker)" opacity="0.22"></ellipse>
   <ellipse cx="150" cy="250" rx="30" ry="10" fill="var(--dog-belly)"></ellipse>
-  <rect class="blanket" x="108" y="228" width="110" height="22" rx="11" fill="var(--blanket)"></rect>
+  <rect x="112" y="221" width="96" height="26" rx="13" fill="url(#sweaterStripe)"></rect>
   <rect x="222" y="248" width="10" height="16" rx="4" fill="url(#gradDog)"></rect>
   <circle cx="222" cy="222" r="19" fill="url(#gradDog)"></circle>
   <rect x="234" y="216" width="26" height="14" rx="7" fill="url(#gradDog)"></rect>
   <ellipse cx="258" cy="223" rx="4" ry="3" fill="var(--ink)"></ellipse>
-  <path d="M212 210 Q200 224 208 244 Q218 238 216 214 Z" fill="var(--wood-darker)"></path>
+  <path d="M212 210 Q200 224 208 244 Q218 238 216 214 Z" fill="var(--dog-ear)"></path>
   <rect x="214" y="228" width="22" height="7" rx="3.5" fill="var(--accent)"></rect>
   <g id="eyes-open">
     <ellipse cx="228" cy="216" rx="3" ry="4" fill="var(--ink)"></ellipse>
