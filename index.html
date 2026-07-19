@@ -3,15 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cozy Cat Focus — ADHD-friendly Pomodoro</title>
-<meta name="description" content="A gentle, pet-themed Pomodoro timer built for ADHD brains: one step at a time, flexible timers, and dopamine-friendly rewards.">
+<title>Cozy Dachshund Focus — ADHD-friendly Pomodoro</title>
+<meta name="description" content="A gentle, dachshund-themed Pomodoro timer built for ADHD brains: one step at a time, flexible timers, and dopamine-friendly rewards.">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <main class="wrap">
     <header class="top-row">
-      <h1 class="app-title">Cozy Cat Focus</h1>
-      <button class="icon-btn" id="settings-btn" title="Settings" aria-label="Settings">⚙️</button>
+      <h1 class="app-title">Cozy Dachshund Focus</h1>
+      <button class="icon-btn" id="sound-btn" title="Toggle sound" aria-label="Toggle sound">🔔</button>
     </header>
 
     <div class="mode-row" role="tablist" aria-label="Timer mode">
@@ -22,19 +22,11 @@
 
     <div class="length-row" id="length-row"></div>
 
-    <div class="ring-area">
-      <svg width="220" height="220" aria-hidden="true">
-        <circle cx="110" cy="110" r="96" fill="none" stroke="#00000022" stroke-width="10"/>
-        <circle id="arc" cx="110" cy="110" r="96" fill="none" stroke="var(--leather-darker)" stroke-width="10"
-          stroke-linecap="round" stroke-dasharray="603.2" stroke-dashoffset="0"
-          transform="rotate(-90 110 110)"/>
-      </svg>
-      <div class="ring-center">
-        <span class="time-txt" id="disp">25:00</span>
-        <div class="nudge-row">
-          <button class="nudge-btn" id="minus-btn" title="1 minute less">−1m</button>
-          <button class="nudge-btn" id="plus-btn" title="1 minute more">+1m</button>
-        </div>
+    <div class="timer-display">
+      <span class="time-txt" id="disp">25:00</span>
+      <div class="nudge-row">
+        <button class="nudge-btn" id="minus-btn" title="1 minute less">−1m</button>
+        <button class="nudge-btn" id="plus-btn" title="1 minute more">+1m</button>
       </div>
     </div>
 
@@ -43,89 +35,91 @@
     <div class="cat-scene" id="cat-scene">
       <svg viewBox="0 0 300 320" aria-hidden="true" id="room-svg" preserveAspectRatio="xMidYMax slice">
         <defs>
-          <radialGradient id="gradCatBlack" cx="35%" cy="30%" r="75%">
-            <stop offset="0%" stop-color="#3a352c"/>
-            <stop offset="100%" stop-color="#17140f"/>
-          </radialGradient>
-          <radialGradient id="gradCatWhite" cx="35%" cy="30%" r="75%">
-            <stop offset="0%" stop-color="#ffffff"/>
-            <stop offset="100%" stop-color="#d9d0ba"/>
-          </radialGradient>
           <radialGradient id="gradDog" cx="35%" cy="30%" r="75%">
-            <stop offset="0%" stop-color="#c1793f"/>
-            <stop offset="100%" stop-color="#8a4a26"/>
+            <stop offset="0%" stop-color="#cd8a54"/>
+            <stop offset="100%" stop-color="#9a5c30"/>
           </radialGradient>
-          <linearGradient id="gradLeather" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#9c6a44"/>
-            <stop offset="100%" stop-color="#6e4a2e"/>
+          <linearGradient id="gradWood" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#e3ba8d"/>
+            <stop offset="100%" stop-color="#c99668"/>
           </linearGradient>
           <linearGradient id="gradFloor" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#8a5138"/>
-            <stop offset="100%" stop-color="#5c3625"/>
+            <stop offset="0%" stop-color="#dcebde"/>
+            <stop offset="100%" stop-color="#c3dac6"/>
           </linearGradient>
-          <pattern id="gingham" width="20" height="20" patternUnits="userSpaceOnUse">
-            <rect width="20" height="20" fill="var(--rug-a)"/>
-            <rect width="10" height="10" fill="var(--rug-b)"/>
-            <rect x="10" y="10" width="10" height="10" fill="var(--rug-b)"/>
+          <pattern id="chairStripe" width="14" height="14" patternUnits="userSpaceOnUse">
+            <rect width="14" height="14" fill="var(--stripe-white)"/>
+            <rect width="7" height="14" fill="var(--stripe-pink)"/>
+          </pattern>
+          <pattern id="rugStripe" width="16" height="16" patternUnits="userSpaceOnUse">
+            <rect width="16" height="16" fill="var(--stripe-white)"/>
+            <rect width="8" height="16" fill="var(--stripe-pink)" opacity="0.8"/>
           </pattern>
         </defs>
 
-        <rect x="0" y="0" width="300" height="220" fill="var(--wall)"/>
-        <rect x="0" y="220" width="300" height="100" fill="url(#gradFloor)"/>
-        <rect x="0" y="218" width="300" height="4" fill="var(--floor-trim)"/>
+        <rect x="0" y="0" width="300" height="215" fill="var(--wall)"/>
+        <rect x="0" y="215" width="300" height="105" fill="url(#gradFloor)"/>
+        <rect x="0" y="213" width="300" height="4" fill="var(--floor-trim)"/>
 
         <!-- wall art: paw print frame -->
-        <rect x="18" y="22" width="52" height="64" rx="4" fill="var(--accent)"/>
-        <rect x="24" y="28" width="40" height="52" rx="2" fill="var(--cream)"/>
-        <ellipse cx="44" cy="61" rx="8" ry="6" fill="var(--rose)"/>
-        <circle cx="34" cy="47" r="4" fill="var(--rose)"/>
-        <circle cx="44" cy="43" r="4.5" fill="var(--rose)"/>
-        <circle cx="54" cy="47" r="4" fill="var(--rose)"/>
+        <rect x="18" y="20" width="50" height="60" rx="4" fill="var(--accent)"/>
+        <rect x="24" y="26" width="38" height="48" rx="2" fill="var(--cream)"/>
+        <ellipse cx="43" cy="56" rx="7.5" ry="5.5" fill="var(--dog-copper)"/>
+        <circle cx="34" cy="43" r="3.8" fill="var(--dog-copper)"/>
+        <circle cx="43" cy="39" r="4.2" fill="var(--dog-copper)"/>
+        <circle cx="52" cy="43" r="3.8" fill="var(--dog-copper)"/>
+
+        <!-- little bow on the wall -->
+        <path d="M18 105 L8 96 L8 114 Z" fill="var(--accent)"/>
+        <path d="M26 105 L36 96 L36 114 Z" fill="var(--accent)"/>
+        <circle cx="22" cy="105" r="4" fill="var(--accent-dark)"/>
 
         <!-- book stack -->
         <g>
-          <rect x="8" y="296" width="60" height="13" rx="2" fill="#7d3838" transform="rotate(-2 38 302)"/>
-          <rect x="10" y="283" width="55" height="13" rx="2" fill="#3f7a6e" transform="rotate(1.5 38 289)"/>
-          <rect x="8" y="270" width="58" height="13" rx="2" fill="#2b4a72" transform="rotate(-1.5 38 276)"/>
-          <rect x="12" y="257" width="48" height="13" rx="2" fill="var(--accent)" transform="rotate(2 36 263)"/>
-          <rect x="14" y="245" width="40" height="12" rx="2" fill="var(--cream)" stroke="var(--accent)" stroke-width="2" transform="rotate(-1 34 251)"/>
+          <rect x="8" y="296" width="58" height="13" rx="2" fill="var(--mint)" transform="rotate(-2 37 302)"/>
+          <rect x="10" y="283" width="53" height="13" rx="2" fill="var(--accent)" transform="rotate(1.5 37 289)"/>
+          <rect x="8" y="270" width="56" height="13" rx="2" fill="#e3b95e" transform="rotate(-1.5 36 276)"/>
+          <rect x="12" y="257" width="46" height="13" rx="2" fill="var(--mint-dark)" transform="rotate(2 35 263)"/>
+          <rect x="14" y="245" width="38" height="12" rx="2" fill="var(--cream)" stroke="var(--accent)" stroke-width="2" transform="rotate(-1 33 251)"/>
         </g>
 
-        <!-- cat tree with second cat -->
+        <!-- side table with plaid lamp and mug -->
         <g>
-          <rect x="248" y="110" width="10" height="190" rx="3" fill="var(--leather-dark)"/>
-          <rect x="210" y="245" width="88" height="12" rx="5" fill="var(--leather-dark)"/>
-          <rect x="222" y="170" width="64" height="12" rx="5" fill="var(--leather-dark)"/>
-          <circle cx="230" cy="224" r="14" fill="#ffe9a8" opacity="0.35"/>
-          <rect x="225" y="233" width="6" height="12" fill="var(--leather-darker)"/>
-          <path d="M222 233 L238 233 L232 214 Z" fill="var(--cream)"/>
-          <ellipse cx="278" cy="240" rx="8" ry="6" fill="var(--teal)"/>
-          <ellipse cx="253" cy="157" rx="15" ry="12" fill="var(--cat-black)"/>
-          <circle cx="253" cy="140" r="10" fill="var(--cat-black)"/>
-          <path d="M243 132 L239 120 L250 130 Z" fill="var(--cat-black)"/>
-          <path d="M263 132 L267 120 L256 130 Z" fill="var(--cat-black)"/>
-          <path d="M266 160 Q278 155 274 142" stroke="var(--cat-black)" stroke-width="5" fill="none" stroke-linecap="round"/>
-          <rect x="243" y="146" width="20" height="7" rx="3" fill="var(--accent)"/>
+          <ellipse cx="271" cy="283" rx="19" ry="6" fill="var(--wood-darker)" opacity="0.5"/>
+          <rect x="266" y="251" width="10" height="32" rx="3" fill="var(--wood-dark)"/>
+          <ellipse cx="271" cy="251" rx="25" ry="7" fill="var(--wood-dark)"/>
+          <rect x="268" y="217" width="5" height="34" fill="var(--wood-darker)"/>
+          <path d="M255 217 L289 217 L281 193 L263 193 Z" fill="var(--lamp-shade)"/>
+          <line x1="264" y1="204" x2="280" y2="204" stroke="var(--wood-darker)" stroke-width="1.3" opacity="0.5"/>
+          <line x1="266" y1="196" x2="261" y2="215" stroke="var(--wood-darker)" stroke-width="1.3" opacity="0.5"/>
+          <line x1="272" y1="196" x2="272" y2="215" stroke="var(--wood-darker)" stroke-width="1.3" opacity="0.5"/>
+          <line x1="278" y1="196" x2="283" y2="215" stroke="var(--wood-darker)" stroke-width="1.3" opacity="0.5"/>
+          <circle cx="271" cy="205" r="13" fill="#ffe9a8" opacity="0.3"/>
+          <path d="M254 249 L254 235 Q254 231 258 231 Q262 231 262 235 L262 249 Z" fill="var(--cream)"/>
+          <path d="M262 236 Q268 236 268 241 Q268 246 262 245" fill="none" stroke="var(--cream)" stroke-width="2.5"/>
+          <circle cx="258" cy="240" r="2.3" fill="var(--accent)"/>
         </g>
 
-        <!-- gingham rug -->
-        <rect x="50" y="262" width="220" height="55" rx="10" fill="url(#gingham)" transform="rotate(-1.5 160 290)"/>
+        <!-- striped rug -->
+        <rect x="55" y="260" width="200" height="52" rx="12" fill="url(#rugStripe)" transform="rotate(-1.5 155 286)"/>
 
-        <!-- recliner chair -->
+        <!-- bergere armchair -->
         <g>
-          <rect x="95" y="255" width="140" height="20" rx="9" fill="var(--leather-dark)"/>
-          <rect x="115" y="273" width="12" height="34" rx="5" fill="var(--leather-darker)"/>
-          <rect x="195" y="273" width="12" height="34" rx="5" fill="var(--leather-darker)"/>
-          <rect x="70" y="185" width="25" height="80" rx="12" fill="url(#gradLeather)"/>
-          <rect x="205" y="185" width="25" height="80" rx="12" fill="url(#gradLeather)"/>
-          <rect x="95" y="150" width="140" height="110" rx="22" fill="url(#gradLeather)"/>
-          <ellipse cx="165" cy="146" rx="75" ry="18" fill="url(#gradLeather)"/>
-          <line x1="130" y1="168" x2="130" y2="232" stroke="var(--leather-darker)" stroke-width="3" opacity="0.45"/>
-          <line x1="165" y1="163" x2="165" y2="238" stroke="var(--leather-darker)" stroke-width="3" opacity="0.45"/>
-          <line x1="200" y1="168" x2="200" y2="232" stroke="var(--leather-darker)" stroke-width="3" opacity="0.45"/>
+          <rect x="98" y="253" width="132" height="18" rx="8" fill="var(--wood)"/>
+          <rect x="116" y="271" width="11" height="30" rx="5" fill="var(--wood-darker)"/>
+          <rect x="195" y="271" width="11" height="30" rx="5" fill="var(--wood-darker)"/>
+          <path d="M75 190 Q68 230 78 262 L96 262 Q90 225 95 188 Z" fill="url(#gradWood)"/>
+          <path d="M235 190 Q242 230 232 262 L214 262 Q220 225 215 188 Z" fill="url(#gradWood)"/>
+          <path d="M92 150 Q92 130 110 126 L220 126 Q238 130 238 150 L238 250 Q238 258 228 258 L102 258 Q92 258 92 250 Z" fill="url(#chairStripe)" stroke="var(--wood)" stroke-width="6"/>
+          <ellipse cx="165" cy="128" rx="72" ry="14" fill="var(--wood)"/>
+          <ellipse cx="165" cy="120" rx="10" ry="6" fill="var(--wood-dark)"/>
+          <ellipse cx="160" cy="118" rx="3.5" ry="2.5" fill="var(--wood-darker)"/>
+          <circle cx="152" cy="120" r="1.8" fill="var(--wood-darker)"/>
+          <circle cx="160" cy="115" r="1.8" fill="var(--wood-darker)"/>
+          <circle cx="168" cy="120" r="1.8" fill="var(--wood-darker)"/>
         </g>
 
-        <!-- interactive pet (content injected by script.js based on chosen pet) -->
+        <!-- interactive dachshund -->
         <g id="cat-svg" class="state-focus"></g>
       </svg>
       <div class="sparkle-layer" id="sparkle-layer"></div>
@@ -146,7 +140,7 @@
 
     <div class="break-card" id="break-card" hidden>
       <p class="break-title">break idea</p>
-      <p class="break-idea" id="break-idea">stretch like a cat</p>
+      <p class="break-idea" id="break-idea">stretch like a pup</p>
       <span class="break-tag" id="break-tag">movement</span>
       <button class="shuffle-btn" id="shuffle-btn">🔀 new idea</button>
     </div>
@@ -167,46 +161,6 @@
 
     <div class="toast" id="toast"></div>
   </main>
-
-  <div class="settings-overlay" id="settings-overlay" hidden>
-    <div class="settings-card">
-      <div class="settings-header">
-        <h2>Settings</h2>
-        <button class="icon-btn" id="settings-close" aria-label="Close settings">✕</button>
-      </div>
-
-      <p class="settings-label">choose your companion</p>
-      <div class="pet-picker" id="pet-picker">
-        <button class="pet-option" data-pet="catBlack" aria-label="Black cat">
-          <svg viewBox="0 0 60 50" width="44" height="38" aria-hidden="true">
-            <circle cx="30" cy="30" r="15" fill="#201c18"/>
-            <path d="M18 19 L14 6 L26 17 Z" fill="#201c18"/>
-            <path d="M42 19 L46 6 L34 17 Z" fill="#201c18"/>
-          </svg>
-          <span>Black cat</span>
-        </button>
-        <button class="pet-option" data-pet="catWhite" aria-label="White cat">
-          <svg viewBox="0 0 60 50" width="44" height="38" aria-hidden="true">
-            <circle cx="30" cy="30" r="15" fill="#f5efe0" stroke="#d9d0ba" stroke-width="1"/>
-            <path d="M18 19 L14 6 L26 17 Z" fill="#f5efe0" stroke="#d9d0ba" stroke-width="1"/>
-            <path d="M42 19 L46 6 L34 17 Z" fill="#f5efe0" stroke="#d9d0ba" stroke-width="1"/>
-          </svg>
-          <span>White cat</span>
-        </button>
-        <button class="pet-option" data-pet="dachshund" aria-label="Dachshund">
-          <svg viewBox="0 0 60 50" width="44" height="38" aria-hidden="true">
-            <ellipse cx="24" cy="33" rx="20" ry="9" fill="#a85c33"/>
-            <circle cx="46" cy="26" r="9" fill="#a85c33"/>
-            <path d="M40 24 Q34 34 40 42 Q46 38 44 26 Z" fill="#7a3f1f"/>
-          </svg>
-          <span>Dachshund</span>
-        </button>
-      </div>
-
-      <p class="settings-label">sound</p>
-      <button class="settings-row-btn" id="settings-sound-btn">🔔 chime on session end: <strong id="settings-sound-state">on</strong></button>
-    </div>
-  </div>
 
   <script src="script.js"></script>
 </body>

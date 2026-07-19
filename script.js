@@ -1,9 +1,8 @@
-const CIRC = 603.2;
 const STORAGE_KEY = 'cozyCatFocus_v2';
 const LENGTH_OPTIONS = { focus: [10, 15, 25, 45], short: [3, 5, 10], long: [10, 15, 20] };
 const DEFAULT_LENGTHS = { focus: 25, short: 5, long: 15 };
 const BREAK_IDEAS = [
-  { text: 'stretch like a cat', cat: 'movement' },
+  { text: 'stretch like a pup', cat: 'movement' },
   { text: 'do 5 jumping jacks', cat: 'movement' },
   { text: 'dance for 10 seconds', cat: 'movement' },
   { text: 'walk to another room and back', cat: 'movement' },
@@ -20,75 +19,27 @@ const BREAK_IDEAS = [
   { text: 'smell something nice', cat: 'sensory' },
 ];
 
-const PET_SVGS = {
-  catBlack: `
-    <path id="tail" d="M205 233 Q246 213 233 164" stroke="url(#gradCatBlack)" stroke-width="11" fill="none" stroke-linecap="round" style="transform-origin:205px 233px"></path>
-    <ellipse cx="165" cy="230" rx="48" ry="34" fill="url(#gradCatBlack)"></ellipse>
-    <ellipse cx="165" cy="247" rx="22" ry="15" fill="var(--cat-belly)"></ellipse>
-    <rect class="blanket" x="108" y="230" width="114" height="27" rx="13" fill="var(--blanket)"></rect>
-    <circle cx="165" cy="186" r="34" fill="url(#gradCatBlack)"></circle>
-    <path d="M138 166 L130 133 L158 161 Z" fill="url(#gradCatBlack)"></path>
-    <path d="M192 166 L200 133 L172 161 Z" fill="url(#gradCatBlack)"></path>
-    <path d="M142 158 L137 140 L152 156 Z" fill="var(--rose)"></path>
-    <path d="M188 158 L193 140 L178 156 Z" fill="var(--rose)"></path>
-    <g id="eyes-open">
-      <ellipse cx="152" cy="186" rx="4" ry="6" fill="var(--cream)"></ellipse>
-      <ellipse cx="178" cy="186" rx="4" ry="6" fill="var(--cream)"></ellipse>
-    </g>
-    <g id="eyes-closed">
-      <path d="M146 186 Q152 193 158 186" stroke="var(--cream)" stroke-width="3" fill="none" stroke-linecap="round"></path>
-      <path d="M172 186 Q178 193 184 186" stroke="var(--cream)" stroke-width="3" fill="none" stroke-linecap="round"></path>
-    </g>
-    <path d="M160 198 L170 198 L165 204 Z" fill="var(--rose)"></path>
-    <path d="M165 204 Q158 210 149 206" stroke="var(--cream)" stroke-width="2.5" fill="none" stroke-linecap="round"></path>
-    <path d="M165 204 Q172 210 181 206" stroke="var(--cream)" stroke-width="2.5" fill="none" stroke-linecap="round"></path>
-    <text id="zzz" x="222" y="140" font-size="18" fill="var(--zzz)">z z z</text>
-  `,
-  catWhite: `
-    <path id="tail" d="M205 233 Q246 213 233 164" stroke="url(#gradCatWhite)" stroke-width="11" fill="none" stroke-linecap="round" style="transform-origin:205px 233px"></path>
-    <ellipse cx="165" cy="230" rx="48" ry="34" fill="url(#gradCatWhite)"></ellipse>
-    <ellipse cx="165" cy="249" rx="20" ry="13" fill="#e7ded0"></ellipse>
-    <rect class="blanket" x="108" y="230" width="114" height="27" rx="13" fill="var(--blanket)"></rect>
-    <circle cx="165" cy="186" r="34" fill="url(#gradCatWhite)"></circle>
-    <path d="M138 166 L130 133 L158 161 Z" fill="url(#gradCatWhite)"></path>
-    <path d="M192 166 L200 133 L172 161 Z" fill="url(#gradCatWhite)"></path>
-    <path d="M142 158 L137 140 L152 156 Z" fill="var(--rose)"></path>
-    <path d="M188 158 L193 140 L178 156 Z" fill="var(--rose)"></path>
-    <g id="eyes-open">
-      <ellipse cx="152" cy="186" rx="4" ry="6" fill="var(--ink)"></ellipse>
-      <ellipse cx="178" cy="186" rx="4" ry="6" fill="var(--ink)"></ellipse>
-    </g>
-    <g id="eyes-closed">
-      <path d="M146 186 Q152 193 158 186" stroke="var(--ink)" stroke-width="3" fill="none" stroke-linecap="round"></path>
-      <path d="M172 186 Q178 193 184 186" stroke="var(--ink)" stroke-width="3" fill="none" stroke-linecap="round"></path>
-    </g>
-    <path d="M160 198 L170 198 L165 204 Z" fill="var(--rose)"></path>
-    <path d="M165 204 Q158 210 149 206" stroke="var(--ink)" stroke-width="2.5" fill="none" stroke-linecap="round"></path>
-    <path d="M165 204 Q172 210 181 206" stroke="var(--ink)" stroke-width="2.5" fill="none" stroke-linecap="round"></path>
-    <text id="zzz" x="222" y="140" font-size="18" fill="var(--zzz)">z z z</text>
-  `,
-  dachshund: `
-    <path id="tail" d="M92 235 Q65 225 70 205" stroke="url(#gradDog)" stroke-width="8" fill="none" stroke-linecap="round" style="transform-origin:92px 235px"></path>
-    <rect x="115" y="248" width="10" height="16" rx="4" fill="url(#gradDog)"></rect>
-    <ellipse cx="155" cy="238" rx="68" ry="20" fill="url(#gradDog)"></ellipse>
-    <ellipse cx="155" cy="228" rx="58" ry="8" fill="var(--leather-darker)" opacity="0.3"></ellipse>
-    <ellipse cx="150" cy="250" rx="30" ry="10" fill="var(--cat-belly)"></ellipse>
-    <rect class="blanket" x="108" y="228" width="110" height="22" rx="11" fill="var(--blanket)"></rect>
-    <rect x="222" y="248" width="10" height="16" rx="4" fill="url(#gradDog)"></rect>
-    <circle cx="222" cy="222" r="19" fill="url(#gradDog)"></circle>
-    <rect x="234" y="216" width="26" height="14" rx="7" fill="url(#gradDog)"></rect>
-    <ellipse cx="258" cy="223" rx="4" ry="3" fill="var(--ink)"></ellipse>
-    <path d="M212 210 Q200 224 208 244 Q218 238 216 214 Z" fill="var(--leather-darker)"></path>
-    <g id="eyes-open">
-      <ellipse cx="228" cy="216" rx="3" ry="4" fill="var(--ink)"></ellipse>
-    </g>
-    <g id="eyes-closed">
-      <path d="M224 216 Q228 220 232 216" stroke="var(--ink)" stroke-width="2.5" fill="none" stroke-linecap="round"></path>
-    </g>
-    <text id="zzz" x="248" y="195" font-size="18" fill="var(--zzz)">z z z</text>
-  `,
-};
-const PET_KEYS = Object.keys(PET_SVGS);
+const DOG_SVG = `
+  <path id="tail" d="M92 235 Q65 225 70 205" stroke="url(#gradDog)" stroke-width="8" fill="none" stroke-linecap="round" style="transform-origin:92px 235px"></path>
+  <rect x="115" y="248" width="10" height="16" rx="4" fill="url(#gradDog)"></rect>
+  <ellipse cx="155" cy="238" rx="68" ry="20" fill="url(#gradDog)"></ellipse>
+  <ellipse cx="155" cy="228" rx="58" ry="8" fill="var(--wood-darker)" opacity="0.22"></ellipse>
+  <ellipse cx="150" cy="250" rx="30" ry="10" fill="var(--dog-belly)"></ellipse>
+  <rect class="blanket" x="108" y="228" width="110" height="22" rx="11" fill="var(--blanket)"></rect>
+  <rect x="222" y="248" width="10" height="16" rx="4" fill="url(#gradDog)"></rect>
+  <circle cx="222" cy="222" r="19" fill="url(#gradDog)"></circle>
+  <rect x="234" y="216" width="26" height="14" rx="7" fill="url(#gradDog)"></rect>
+  <ellipse cx="258" cy="223" rx="4" ry="3" fill="var(--ink)"></ellipse>
+  <path d="M212 210 Q200 224 208 244 Q218 238 216 214 Z" fill="var(--wood-darker)"></path>
+  <rect x="214" y="228" width="22" height="7" rx="3.5" fill="var(--accent)"></rect>
+  <g id="eyes-open">
+    <ellipse cx="228" cy="216" rx="3" ry="4" fill="var(--ink)"></ellipse>
+  </g>
+  <g id="eyes-closed">
+    <path d="M224 216 Q228 220 232 216" stroke="var(--ink)" stroke-width="2.5" fill="none" stroke-linecap="round"></path>
+  </g>
+  <text id="zzz" x="248" y="195" font-size="18" fill="var(--zzz)">z z z</text>
+`;
 
 function loadState() {
   try {
@@ -99,21 +50,20 @@ function loadState() {
       tasks: Array.isArray(raw.tasks) ? raw.tasks : [],
       currentIndex: typeof raw.currentIndex === 'number' ? raw.currentIndex : -1,
       stats: raw.stats || { date: '', todayCount: 0, streak: 0, lastStreakDate: '' },
-      pet: PET_KEYS.includes(raw.pet) ? raw.pet : 'catBlack',
     };
   } catch {
-    return { lengths: { ...DEFAULT_LENGTHS }, soundOn: true, tasks: [], currentIndex: -1, stats: { date: '', todayCount: 0, streak: 0, lastStreakDate: '' }, pet: 'catBlack' };
+    return { lengths: { ...DEFAULT_LENGTHS }, soundOn: true, tasks: [], currentIndex: -1, stats: { date: '', todayCount: 0, streak: 0, lastStreakDate: '' } };
   }
 }
 
 function saveState() {
   try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify({ lengths, soundOn, tasks, currentIndex, stats, pet }));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ lengths, soundOn, tasks, currentIndex, stats }));
   } catch { /* localStorage unavailable (e.g. private browsing) - state just won't persist */ }
 }
 
 const state = loadState();
-let { lengths, soundOn, tasks, currentIndex, stats, pet } = state;
+let { lengths, soundOn, tasks, currentIndex, stats } = state;
 
 let modeKey = 'focus';
 let total = lengths[modeKey] * 60;
@@ -123,7 +73,6 @@ let interval = null;
 let sessions = 0;
 
 const disp = document.getElementById('disp');
-const arc = document.getElementById('arc');
 const startBtn = document.getElementById('startbtn');
 const toastEl = document.getElementById('toast');
 const dotsEl = document.getElementById('dots');
@@ -135,21 +84,17 @@ const lengthRow = document.getElementById('length-row');
 const breakCard = document.getElementById('break-card');
 const breakIdeaEl = document.getElementById('break-idea');
 const breakTagEl = document.getElementById('break-tag');
+const soundBtn = document.getElementById('sound-btn');
 const currentStepEl = document.getElementById('current-step');
 const nextStepBtn = document.getElementById('next-step-btn');
 const stepCountEl = document.getElementById('step-count');
 const streakLbl = document.getElementById('streak-lbl');
 const todayLbl = document.getElementById('today-lbl');
-const settingsBtn = document.getElementById('settings-btn');
-const settingsOverlay = document.getElementById('settings-overlay');
-const settingsClose = document.getElementById('settings-close');
-const settingsSoundBtn = document.getElementById('settings-sound-btn');
-const settingsSoundState = document.getElementById('settings-sound-state');
-const petPicker = document.getElementById('pet-picker');
+
+catSvg.innerHTML = DOG_SVG;
 
 function fmt(s) { return `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`; }
-function updateArc() { arc.style.strokeDashoffset = CIRC * (1 - remaining / total); }
-function showToast(msg, color = '#b8392f') {
+function showToast(msg, color = '#c85f79') {
   toastEl.textContent = msg; toastEl.style.background = color;
   toastEl.classList.add('show'); setTimeout(() => toastEl.classList.remove('show'), 1800);
 }
@@ -162,36 +107,25 @@ function renderDots() {
   }
 }
 
-function renderPet(key) {
-  pet = PET_KEYS.includes(key) ? key : 'catBlack';
-  catSvg.innerHTML = PET_SVGS[pet];
-  saveState();
-  updatePetPickerUI();
-}
-
-function updatePetPickerUI() {
-  document.querySelectorAll('.pet-option').forEach((btn) => {
-    btn.classList.toggle('active', btn.dataset.pet === pet);
-  });
-}
-
-function playChime() {
+function playYip() {
   if (!soundOn) return;
   try {
     const ctx = new (window.AudioContext || window.webkitAudioContext)();
-    [660, 880].forEach((freq, i) => {
+    [0, 0.16].forEach((delay) => {
       const osc = ctx.createOscillator();
       const gain = ctx.createGain();
-      osc.type = 'sine';
-      osc.frequency.value = freq;
-      const start = ctx.currentTime + i * 0.18;
+      const start = ctx.currentTime + delay;
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(520, start);
+      osc.frequency.exponentialRampToValueAtTime(980, start + 0.07);
+      osc.frequency.exponentialRampToValueAtTime(700, start + 0.13);
       gain.gain.setValueAtTime(0, start);
-      gain.gain.linearRampToValueAtTime(0.15, start + 0.05);
-      gain.gain.linearRampToValueAtTime(0, start + 0.32);
+      gain.gain.linearRampToValueAtTime(0.18, start + 0.02);
+      gain.gain.linearRampToValueAtTime(0, start + 0.14);
       osc.connect(gain); gain.connect(ctx.destination);
-      osc.start(start); osc.stop(start + 0.35);
+      osc.start(start); osc.stop(start + 0.16);
     });
-  } catch { /* Web Audio unsupported - silently skip the chime */ }
+  } catch { /* Web Audio unsupported - silently skip the sound */ }
 }
 
 function spawnSparkles() {
@@ -210,7 +144,7 @@ function spawnSparkles() {
 function celebrate() {
   catSvg.classList.add('state-celebrate');
   spawnSparkles();
-  playChime();
+  playYip();
   setTimeout(() => {
     catSvg.classList.remove('state-celebrate');
     catSvg.setAttribute('class', modeKey === 'focus' ? 'state-focus' : 'state-break');
@@ -252,7 +186,7 @@ function renderLengthChips() {
     chip.className = 'len-chip' + (mins === lengths[modeKey] ? ' active' : '') + (running ? ' disabled' : '');
     chip.textContent = `${mins}m`;
     chip.onclick = () => {
-      if (running) { showToast('pause first to change length', '#5a6b45'); return; }
+      if (running) { showToast('pause first to change length', '#4c8257'); return; }
       lengths[modeKey] = mins;
       saveState();
       setMode(modeKey);
@@ -264,7 +198,7 @@ function renderLengthChips() {
 function setMode(key) {
   clearInterval(interval); running = false; startBtn.textContent = 'start';
   modeKey = key; total = lengths[key] * 60; remaining = total;
-  disp.textContent = fmt(remaining); arc.style.strokeDashoffset = 0;
+  disp.textContent = fmt(remaining);
   document.getElementById('phase-lbl').textContent = key === 'focus' ? 'focus time' : key === 'short' ? 'short break' : 'long break';
   catSvg.setAttribute('class', key === 'focus' ? 'state-focus' : 'state-break');
   document.querySelectorAll('.mtab').forEach((t) => { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
@@ -279,7 +213,7 @@ function toggle() {
   if (!running) {
     running = true; startBtn.textContent = 'pause'; renderLengthChips();
     interval = setInterval(() => {
-      remaining--; disp.textContent = fmt(remaining); updateArc();
+      remaining--; disp.textContent = fmt(remaining);
       if (remaining <= 0) {
         clearInterval(interval); running = false; startBtn.textContent = 'start'; renderLengthChips();
         if (modeKey === 'focus') {
@@ -289,7 +223,7 @@ function toggle() {
           showToast(sessions === 4 ? '4 done! time for a long break' : 'session done! great work');
           if (sessions === 4) sessions = 0;
         } else {
-          showToast('break over! back to it', '#5a6b45');
+          showToast('break over! back to it', '#4c8257');
         }
       }
     }, 1000);
@@ -300,20 +234,20 @@ function toggle() {
 
 function reset() {
   clearInterval(interval); running = false; startBtn.textContent = 'start';
-  remaining = total; disp.textContent = fmt(remaining); arc.style.strokeDashoffset = 0;
+  remaining = total; disp.textContent = fmt(remaining);
   renderLengthChips();
 }
 
 function skip() {
   if (modeKey === 'focus') { sessions = Math.min(4, sessions + 1); renderDots(); }
-  reset(); showToast('skipped!', '#3d5230');
+  reset(); showToast('skipped!', '#4c8257');
 }
 
 function nudge(deltaMin) {
   const deltaSec = deltaMin * 60;
   remaining = Math.max(0, remaining + deltaSec);
   total = Math.max(60, total + deltaSec);
-  disp.textContent = fmt(remaining); updateArc();
+  disp.textContent = fmt(remaining);
 }
 
 function addTask() {
@@ -336,7 +270,7 @@ function nextStep() {
   tasks[currentIndex].done = true;
   currentIndex = findNextIncomplete(currentIndex);
   saveState(); renderTasks(); renderCurrentStep();
-  showToast('step done! nice work', '#3d5230');
+  showToast('step done! nice work', '#4c8257');
 }
 
 function renderCurrentStep() {
@@ -370,7 +304,7 @@ function renderTasks() {
 
 function toggleSound() {
   soundOn = !soundOn;
-  settingsSoundState.textContent = soundOn ? 'on' : 'off';
+  soundBtn.textContent = soundOn ? '🔔' : '🔕';
   saveState();
 }
 
@@ -385,18 +319,10 @@ document.getElementById('tab-long').addEventListener('click', () => setMode('lon
 document.getElementById('add-btn').addEventListener('click', addTask);
 document.getElementById('next-step-btn').addEventListener('click', nextStep);
 document.getElementById('shuffle-btn').addEventListener('click', newBreakIdea);
+soundBtn.addEventListener('click', toggleSound);
 taskIn.addEventListener('keydown', (e) => { if (e.key === 'Enter') addTask(); });
 
-settingsBtn.addEventListener('click', () => { settingsOverlay.hidden = false; });
-settingsClose.addEventListener('click', () => { settingsOverlay.hidden = true; });
-settingsOverlay.addEventListener('click', (e) => { if (e.target === settingsOverlay) settingsOverlay.hidden = true; });
-settingsSoundBtn.addEventListener('click', toggleSound);
-document.querySelectorAll('.pet-option').forEach((btn) => {
-  btn.addEventListener('click', () => renderPet(btn.dataset.pet));
-});
-
-settingsSoundState.textContent = soundOn ? 'on' : 'off';
-renderPet(pet);
+soundBtn.textContent = soundOn ? '🔔' : '🔕';
 renderDots();
 renderStats();
 renderTasks();
