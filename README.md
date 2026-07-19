@@ -24,6 +24,6 @@ open index.html   # or double-click it
 
 ## Tech
 
-- HTML5 + CSS3 (flexbox, SVG ring + animation)
+- HTML5 + CSS3 (flexbox, SVG scene + animations)
 - Vanilla JavaScript, no dependencies
 - `localStorage` for streaks, step lists, and preferences — everything stays on your device
